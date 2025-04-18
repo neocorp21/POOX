@@ -29,6 +29,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <!-- Dependencia de JUnit 5 (Jupiter) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -47,7 +48,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
+            <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
 
@@ -55,39 +56,35 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.5.2.Final</version>
+            <version>1.5.5.Final</version>
         </dependency>
     </dependencies>
 
     <!-- Propiedades del proyecto -->
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version> <!-- Actualizado a JDK 17 -->
     </properties>
 
     <!-- Configuración de compilación y plugins -->
     <build>
         <plugins>
             <!-- Plugin de JaCoCo para pruebas de cobertura de código -->
-
-                    <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>0.8.7</version>
-                        <executions>
-                            <!-- Ejecuta el plugin después de las pruebas -->
-                            <execution>
-                                <goals>
-                                    <goal>prepare-agent</goal> <!-- Prepara el agente de Jacoco -->
-                                    <goal>report</goal> <!-- Genera el reporte -->
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/jacoco</outputDirectory> <!-- Directorio de salida -->
-                        </configuration>
-                    </plugin>
-
-
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal> <!-- Prepara el agente de Jacoco -->
+                            <goal>report</goal> <!-- Genera el reporte -->
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/jacoco</outputDirectory> <!-- Directorio de salida -->
+                </configuration>
+            </plugin>
 
             <!-- Plugin de Spring Boot -->
             <plugin>
@@ -96,22 +93,37 @@
                 <version>2.7.12</version> <!-- Versión de Spring Boot -->
             </plugin>
 
+
+
             <!-- Plugin de Maven Compiler para MapStruct -->
+
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>1.5.2.Final</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.13.0</version>
+            <configuration>
+                <source>${java.version}</source>
+                <target>${java.version}</target>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>1.18.30</version>
+                    </path>
+                    <!-- This is needed when using Lombok 1.18.16 and above -->
+                    <path>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok-mapstruct-binding</artifactId>
+                        <version>0.2.0</version>
+                    </path>
+                    <!-- Mapstruct should follow the lombok path(s) -->
+                    <path>
+                        <groupId>org.mapstruct</groupId>
+                        <artifactId>mapstruct-processor</artifactId>
+                        <version>1.5.5.Final</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
             </plugin>
         </plugins>
     </build>

@@ -1,12 +1,18 @@
 package com.example.demo.mapper;
 
+import com.example.demo.dto.Categoria;
+import com.example.demo.entity.Category;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.Mapping;
+@Mapper(componentModel = "spring")
 
-@Mapper
 public interface POOXMapper {
 
-    POOXMapper INSTANCE = Mappers.getMapper(POOXMapper.class);
+    @Mapping(source = "idCategory", target = "id")
+    @Mapping(source = "name", target = "nombre")
+    Categoria getCategoria(Category category);
 
-    // Aquí puedes definir los métodos de mapeo que necesites
+
 }
+
+

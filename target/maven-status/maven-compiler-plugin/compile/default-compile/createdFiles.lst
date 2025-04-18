@@ -1,0 +1,7 @@
+com\example\demo\dto\Categoria.class
+com\example\demo\service\XDService.class
+com\example\demo\mapper\POOXMapperImpl.class
+com\example\demo\entity\Category.class
+com\example\demo\controller\EjemploController.class
+com\example\demo\POOXApplication.class
+com\example\demo\mapper\POOXMapper.class
