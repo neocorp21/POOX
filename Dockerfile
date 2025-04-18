@@ -12,3 +12,6 @@ EXPOSE 8082
 
 # Define el comando de inicio para tu aplicación
 CMD ["java", "-jar", "app.jar"]
+
+
+
